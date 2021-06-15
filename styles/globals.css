@@ -1,0 +1,66 @@
+
+html,
+body {
+  background-color: #f8f8fb;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  outline: none;
+}
+
+
+#container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+}
+
+/* Separar em um arquivo */
+#sidebar-menu .sub-menu {
+  transition: all 0.5s ease;
+}
+
+#sidebar-menu .sub-menu[aria-expanded='false'] {
+  display: none;
+  /* opacity: 0; */
+}
+
+#sidebar-menu .sub-menu[aria-expanded='true'] {
+  opacity: 1;
+}
+
+#sidebar-menu span[active='true'] {
+  color: #fff;
+}
+
+#sidebar-menu i[active='true'] {
+  color: #fff;
+}
+
+.main-content {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#layout-wrapper {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100vh;
+}
+

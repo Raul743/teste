@@ -1,0 +1,9 @@
+{
+  "title": "Welcome message for sign-in",
+  "greeting": "Seja bem-vindo à Met Care",
+  "current-locale": "Lígua actual",
+  "default-locale": "Língua padrão",
+  "supported-languages": "Linguas suportadas",
+  "email": "E-mail",
+  "password": "Password"
+}

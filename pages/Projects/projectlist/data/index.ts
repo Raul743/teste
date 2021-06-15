@@ -1,0 +1,42 @@
+export const projects = [
+  {
+    title: 'New Admin Design 2',
+    date: '15 Oct, 19',
+    status: 'Completed',
+    source: '/images/companies/img-1.png',
+    content: 'It will be as simple as Occidental',
+    team: [{ source: '/images/users/avatar-1.jpg' }, { source: '/images/users/avatar-1.jpg' }],
+  },
+  {
+    title: 'New Admin Design 2',
+    date: '15 Oct, 19',
+    status: 'Completed',
+    source: '/images/companies/img-1.png',
+    content: 'It will be as simple as Occidental',
+    team: [{ source: '/images/users/avatar-1.jpg' }, { source: '/images/users/avatar-1.jpg' }],
+  },
+  {
+    title: 'New Admin Design 2',
+    date: '15 Oct, 19',
+    status: 'Completed',
+    source: '/images/companies/img-1.png',
+    content: 'It will be as simple as Occidental',
+    team: [{ source: '/images/users/avatar-1.jpg' }, { source: '/images/users/avatar-1.jpg' }],
+  },
+  {
+    title: 'New Admin Design 2',
+    date: '15 Oct, 19',
+    status: 'Completed',
+    source: '/images/companies/img-1.png',
+    content: 'It will be as simple as Occidental',
+    team: [{ source: '/images/users/avatar-1.jpg' }, { source: '/images/users/avatar-1.jpg' }],
+  },
+  {
+    title: 'New Admin Design 2',
+    date: '15 Oct, 19',
+    status: 'Completed',
+    source: '/images/companies/img-1.png',
+    content: 'It will be as simple as Occidental',
+    team: [{ source: '/images/users/avatar-1.jpg' }, { source: '/images/users/avatar-1.jpg' }],
+  },
+];
