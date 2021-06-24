@@ -17,8 +17,26 @@ import Breadcrumbs from '@components/Dashboard-default/breadCrumb';
 
 
 
-const Contactos: React.FC = () => {
+const Contactos: React.FC = (props:any) => {
+  const { users, onGetUsers } = props
   const { SearchBar } = Search
+  const [userList, setUserList] = useState([])
+  const pageOptions = {
+    sizePerPage: 10,
+    totalSize: 50, // replace later with size(users),
+    custom: true,
+  }
+  const handleTableChange = (type:any, { page, searchText }:any) => {
+    setUserList(
+      users.filter(({user}:any) =>
+        Object.keys(user).some(
+          key =>
+            typeof user[key] === "string" &&
+            user[key].toLowerCase().includes(searchText.toLowerCase())
+        )
+      )
+    )
+  }
   return (
     <React.Fragment>
       <div className="page-content">

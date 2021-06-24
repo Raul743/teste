@@ -1,4 +1,4 @@
-import GraphQL from './index';
+import GraphQL from "./index";
 
 export async function getBI(id: string) {
   try {
@@ -47,7 +47,7 @@ export async function getBI(id: string) {
   }
       `
     );
-    console.log('response: ', response);
+    console.log("response: ", response);
     return response;
   } catch (err) {
     console.log(err);
@@ -97,10 +97,34 @@ export async function getMenus() {
       `
     );
 
-    console.log('Resultado: ', resultResponse);
+    console.log("Resultado: ", resultResponse);
 
     return resultResponse?.allMenus?.edges;
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
+  }
+}
+
+export async function getPerson() {
+  try {
+    const resultResponse: any = await GraphQL.get(
+      `
+      allPerson{
+        edges{
+          node{
+            id
+            name
+          }
+        }
+      }
+      
+      `
+    );
+
+    console.log("Resultado Pessoas: ", resultResponse);
+
+    return resultResponse?.allPerson?.edges;
+  } catch (err) {
+    console.log(err);
   }
 }

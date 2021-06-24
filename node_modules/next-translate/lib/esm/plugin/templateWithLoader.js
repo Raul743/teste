@@ -1,0 +1,39 @@
+import { overwriteLoadLocales } from './utils';
+export default function templateWithLoader(rawCode, _a) {
+    var _b = _a === void 0 ? {} : _a, _c = _b.page, page = _c === void 0 ? '' : _c, _d = _b.typescript, typescript = _d === void 0 ? false : _d, _e = _b.loader, loader = _e === void 0 ? 'getStaticProps' : _e, _f = _b.hasLoader, hasLoader = _f === void 0 ? false : _f, _g = _b.hasLoadLocaleFrom, hasLoadLocaleFrom = _g === void 0 ? false : _g;
+    var tokenToReplace = "__CODE_TOKEN_" + Date.now().toString(16) + "__";
+    var modifiedCode = rawCode;
+    if (hasLoader) {
+        modifiedCode = modifiedCode
+            .replace(new RegExp("(const|var|let|async +function|function|import|import {.* as) +" + loader + "\\W"), function (v) {
+            return v.replace(new RegExp("\\W" + loader + "\\W"), function (r) {
+                return r.replace(loader, '_' + loader);
+            });
+        })
+            .replace(new RegExp("export +(const|var|let|async +function|function) +_" + loader), function (v) { return v.replace('export', ''); })
+            .replace(/export +\{ *(getStaticProps|getServerSideProps)( |,)*\}/, '')
+            .replace(new RegExp("^ *export {(.|\n)*" + loader + "(.|\n)*}", 'gm'), function (v) {
+            return v
+                .replace(new RegExp("(\\w+ +as +)?" + loader + "\\W", 'gm'), function (v) {
+                return v.endsWith(loader) ? '' : v[v.length - 1];
+            })
+                .replace(/,( |\n)*,/gm, ',')
+                .replace(/{( |\n)*,/gm, '{')
+                .replace(/{,( \n)*}/gm, '}')
+                .replace(/^ *export +{( |\n)*}\W*$/gm, '');
+        })
+            .replace(/^ *import +{( |\n)*[^}]*/gm, function (v) {
+            if (v.match(new RegExp("\\W+" + loader + " +as ")))
+                return v;
+            return v.replace(new RegExp("\\W+" + loader + "(\\W|$)"), function (r) {
+                return r.replace(loader, loader + " as _" + loader);
+            });
+        });
+    }
+    var template = "\n    import __i18nConfig from '@next-translate-root/i18n'\n    import __loadNamespaces from 'next-translate/loadNamespaces'\n    " + tokenToReplace + "\n    export async function " + loader + "(ctx) {\n        " + (hasLoader ? "let res = _" + loader + "(ctx)" : '') + "\n        " + (hasLoader ? "if(typeof res.then === 'function') res = await res" : '') + "\n        return {\n          " + (hasLoader ? '...res,' : '') + "\n          props: {\n            " + (hasLoader ? '...(res.props || {}),' : '') + "\n            ...(await __loadNamespaces({\n              ...ctx,\n              pathname: '" + page + "',\n              loaderName: '" + loader + "',\n              ...__i18nConfig,\n              " + overwriteLoadLocales(hasLoadLocaleFrom) + "\n            }))\n          }\n        }\n    }\n  ";
+    if (typescript)
+        template = template.replace(/\n/g, '\n// @ts-ignore\n');
+    return template.replace(tokenToReplace, function () {
+        return "\n" + modifiedCode + "\n";
+    });
+}

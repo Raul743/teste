@@ -21,9 +21,9 @@ export default function Login() {
     console.log('pathname=>', pathname);
   }, []);
 
-  if (session && pathname === '/') {
-    return <Redirect to="/dashboard/pessoa" />;
-  }
+  //if (session && pathname === '/') {
+  //  return <Redirect to="/dashboard/pessoa" />;
+  //}
 
   if (loading) {
     <h3>Loading...</h3>;
@@ -147,7 +147,7 @@ export default function Login() {
                                   className="social-list-item bg-danger text-white border-danger"
                                   onClick={() =>
                                     signIn('google', {
-                                      callbackUrl: 'admin/pessoa',
+                                      callbackUrl: 'dashboard/pessoa',
                                     })
                                   }
                                 >

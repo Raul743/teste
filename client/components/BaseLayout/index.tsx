@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import Sidebar from '../Sidebar';
-import Header from '../Header';
-import Footer from '../Footer';
-import { Main } from './styles';
-import { BaseLayoutProps } from './types';
+import { FC } from "react";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Footer from "../Footer";
+import { Main } from "./styles";
+import { BaseLayoutProps } from "./types";
 
 const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
   return (
@@ -14,7 +14,7 @@ const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
         <div className="page-content">
           <div className="container-fluid">{children}</div>
         </div>
-        <Footer />
+        {/**<Footer /> */}
       </Main>
     </div>
   );
