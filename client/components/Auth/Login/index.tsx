@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import { signIn, useSession } from 'next-auth/client';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { Formik, Form } from 'formik';
-import { Row, Col, CardBody, Card, Container } from 'reactstrap';
-import { Redirect } from '../../../../utils/Redirect';
-import { Input } from '../../index';
-import logo from '../../../../assets/images/logo.svg';
-import profile from '../../../../assets/images/profile-img.png';
-import { validate, initialValues } from './schemaValidate';
-
+import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { Formik, Form } from "formik";
+import { Row, Col, CardBody, Card, Container } from "reactstrap";
+import { Redirect } from "../../../../utils/Redirect";
+import { Input } from "../../index";
+import logo from "../../../../assets/images/logo.svg";
+import profile from "../../../../assets/images/profile-img.png";
+import { validate, initialValues } from "./schemaValidate";
+import { useForm } from "react-hook-form";
 export default function Login() {
   const [session, loading] = useSession();
   const { pathname } = useRouter();
-
-  console.log('validate=>', validate);
+  // const { register, handleSubmit } = useForm();
+  console.log("validate=>", validate);
 
   useEffect(() => {
-    console.log('session=>', session);
-    console.log('pathname=>', pathname);
+    console.log("session=>", session);
+    console.log("pathname=>", pathname);
   }, []);
 
   //if (session && pathname === '/') {
@@ -30,7 +30,7 @@ export default function Login() {
   }
 
   const handleSubmit = (data: object) => {
-    console.log('DataSubmited=>', data);
+    console.log("DataSubmited=>", data);
   };
 
   const AuthLogo = () => (
@@ -81,7 +81,7 @@ export default function Login() {
                     onSubmit={handleSubmit}
                     validationSchema={validate}
                   >
-                    {formik => (
+                    {(formik) => (
                       <Form>
                         <Col xl="12">
                           <Input
@@ -110,7 +110,10 @@ export default function Login() {
                             className="form-check-input"
                             id="customControlInline"
                           />
-                          <label className="form-check-label" htmlFor="customControlInline">
+                          <label
+                            className="form-check-label"
+                            htmlFor="customControlInline"
+                          >
                             Remember me
                           </label>
                         </div>
@@ -133,7 +136,9 @@ export default function Login() {
                                 <a
                                   className="social-list-item bg-primary text-white border-primary"
                                   onClick={() => {
-                                    signIn('facebook', { callbackUrl: '/admin/pessoa' });
+                                    signIn("facebook", {
+                                      callbackUrl: "/admin/pessoa",
+                                    });
                                   }}
                                 >
                                   <i className="mdi mdi-facebook" />
@@ -146,8 +151,8 @@ export default function Login() {
                                 <a
                                   className="social-list-item bg-danger text-white border-danger"
                                   onClick={() =>
-                                    signIn('google', {
-                                      callbackUrl: 'dashboard/pessoa',
+                                    signIn("google", {
+                                      callbackUrl: "dashboard/pessoa",
                                     })
                                   }
                                 >
@@ -161,8 +166,8 @@ export default function Login() {
                                 <a
                                   className="social-list-item bg-info text-white border-info"
                                   onClick={() =>
-                                    signIn('twitter', {
-                                      callbackUrl: '/admin/pessoa',
+                                    signIn("twitter", {
+                                      callbackUrl: "/admin/pessoa",
                                     })
                                   }
                                 >
@@ -182,15 +187,16 @@ export default function Login() {
 
               <div className="mt-5 text-center">
                 <p>
-                  Não tem uma conta ?{' '}
+                  Não tem uma conta ?{" "}
                   <a href="register" className="fw-medium text-primary">
-                    {' '}
-                    Cadastre-se agora{' '}
-                  </a>{' '}
+                    {" "}
+                    Cadastre-se agora{" "}
+                  </a>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} SNIR Template. Criado{' '}
-                  <i className="mdi mdi-heart text-danger" /> Pela Snir-Devesenvolvimento
+                  © {new Date().getFullYear()} SNIR Template. Criado{" "}
+                  <i className="mdi mdi-heart text-danger" /> Pela
+                  Snir-Devesenvolvimento
                 </p>
               </div>
             </Col>
